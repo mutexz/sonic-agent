@@ -241,7 +241,7 @@ public class IOSWSServer implements IIOSWSServer {
                     break;
                 }
                 case "location": {
-                    if (msg.getString("detail").equals("set")) {
+                    if ("set".equals(msg.getString("detail"))) {
                         SibTool.locationSet(udId, msg.getString("long"), msg.getString("lat"));
                     } else {
                         SibTool.locationUnset(udId);
@@ -335,7 +335,7 @@ public class IOSWSServer implements IIOSWSServer {
                         case "keyEvent": {
                             if (iosDriver != null) {
                                 try {
-                                    if (msg.getString("key").equals("home") || msg.getString("key").equals("volumeup") || msg.getString("key").equals("volumedown")) {
+                                    if ("home".equals(msg.getString("key")) || "volumeup".equals(msg.getString("key")) || "volumedown".equals(msg.getString("key"))) {
                                         iosDriver.pressButton(msg.getString("key"));
                                     } else if (msg.getString("key").equals("lock")) {
                                         if (iosDriver.isLocked()) {
@@ -427,8 +427,10 @@ public class IOSWSServer implements IIOSWSServer {
                             sendText(session, result.toJSONString());
                             break;
                         }
+                        default:
                     }
                     break;
+                default:
             }
         });
     }
